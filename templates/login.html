@@ -1,12 +1,28 @@
 {% extends 'base.html' %}
 {% block title %}Login{% endblock %}
+{% block head %}<link rel="stylesheet" href="{{ url_for('static',filename='login.css') }}">{% endblock %}
+
 {% block content %}
-<h1>Welcome to my site</h1>
-<form method="POST" action="">
-    {{form.hidden_tag()}}
-    {{form.username}}
-    {{form.password}}
-    {{form.submit}}
-</form>
-New to this site? <a href={{url_for('register')}}>Register</a>
+
+<div class="form">
+    <form method="POST" action="">
+        <div class="container">
+            <h1 style="text-align: center;">Login</h1>
+            <p style="text-align: center;">Please fill in this form to login to your account.</p>
+            {% for mesg in get_flashed_messages() %}
+            <h1 style="text-align: center;color:red;">{{ mesg }}</h1>
+            {% endfor %}
+            <hr>
+            {{form.hidden_tag()}}
+            <label for="email"><b>Username</b></label>
+            {{form.username}}
+            <label for="psw"><b>Password</b></label>
+            {{form.password}}
+            {{form.submit}}
+        </div>
+        <div class="container signin">
+            <p>Don't you have an account? <a href={{url_for('register')}}>Register</a>.</p>
+        </div>
+    </form>
+</div>
 {% endblock %}

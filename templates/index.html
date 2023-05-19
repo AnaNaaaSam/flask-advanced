@@ -1,15 +1,28 @@
 {% extends 'base.html' %}
+{% block head %}<link rel="stylesheet" href="{{ url_for('static',filename='home.css') }}">{% endblock %}
 {% block title %}Home{% endblock %}
 {% block content %}
-<h1>Welcome to my site</h1>
-{%for post in posts%}
-<div class='single-post'>
-<h2>{{post.title}}</h2>
-<p>{%for tag in post.id_labeled%} {{tag.name}}{%endfor%}</p>
-<p>{{post.desc}}</p>
+
+
+
+<div class="ContentMake">
+    <a href={{url_for('new_post')}} class="CP">Create New Post</a>
 </div>
-{%endfor%}
-<a href={{url_for('login')}}>Login</a>
-<br/>
-<a href={{url_for('register')}}>register</a>
+
+<div class="row">
+    <div class="leftcolumn">
+    {% for post in posts %}
+      <div class="card">
+        <h2>{{post.title}}</h2>
+       
+        <p>{%for tag in post.id_labeled%} {{tag.name}}{%endfor%}</p>
+
+        <p>{{post.desc}}</p>
+      
+
+      </div>
+
+    {% endfor %}
+    </div>
+</div>
 {% endblock %}

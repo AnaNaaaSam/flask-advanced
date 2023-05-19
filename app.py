@@ -1,4 +1,4 @@
-from flask import Flask, url_for, render_template, redirect, request
+from flask import Flask, url_for, render_template, redirect, request,flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, LoginManager, login_user, logout_user, login_required, current_user
 from flask_wtf import FlaskForm
@@ -48,17 +48,17 @@ class Category(db.Model):
 
 class RegisterForm(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(min=4, max=20)],
-                           render_kw={'placeholder': 'username...'})
+                           render_kw={'placeholder': 'username...','id':'email'})
     password = PasswordField(validators=[InputRequired(), Length(min=6, max=20)],
-                           render_kw={'placeholder': 'password...'})
-    submit = SubmitField('Create Account')
+                           render_kw={'placeholder': 'password...','id':'psw'})
+    submit = SubmitField('Create Account',render_kw={"class":"registerbtn"})
 
 class LoginForm(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(min=4, max=20)],
-                           render_kw={'placeholder': 'username...'})
+                           render_kw={'placeholder': 'username...','id':'email'})
     password = PasswordField(validators=[InputRequired(), Length(min=6, max=20)],
-                           render_kw={'placeholder': 'password...'})
-    submit = SubmitField('Login')
+                           render_kw={'placeholder': 'password...','id':'psw'})
+    submit = SubmitField('Login',render_kw={"class":"registerbtn"})
 
 class PostForm(FlaskForm):
     title = StringField(validators=[InputRequired()])

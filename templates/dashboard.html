@@ -1,14 +1,26 @@
 {% extends 'base.html' %}
 {% block title %}Dashboard{% endblock %}
+{% block head %}<link rel="stylesheet" href="{{ url_for('static',filename='dashboard.css') }}">{% endblock %}
 {% block content %}
-<h1>Login Successful</h1>
-<p>Welcome back, {{current_user.username}}</p>
-{%for post in posts%}
-<h2>{{post.title}}</h2>
-<p>{%for tag in post.id_labeled%} {{tag.name}}{%endfor%}</p>
-<i>{{post.date_created}}</i>
-<p>{{post.desc}}</p>
-{%endfor%}
-<a href='{{url_for('new_post')}}'>Create New Post</a>
-<a href={{url_for('logout')}}>Logout</a>
+
+
+
+<div class="ContentMake">
+    <a href={{url_for('logout')}} class="CP">Logout</a>
+</div>
+
+<div class="row">
+    <div class="leftcolumn">
+    {% for post in posts %}
+      <div class="card">
+        <h2>{{post.title}}</h2>
+
+        <p>{{post.desc}}</p>
+        <p>{%for tag in post.id_labeled%} {{tag.name}}{%endfor%}</p>
+
+      </div>
+    {% endfor %}
+    </div>
+</div>
+
 {% endblock %}
